@@ -1,0 +1,29 @@
+import Footer from '@/componets/shared/Footer'
+import NavBar from '@/componets/shared/NavBar'
+import Sidebar from '@/componets/shared/Sidebar'
+import { Box, Container, Grid, Slide, Toolbar, useScrollTrigger } from '@mui/material'
+import { AppProps } from 'next/app'
+import React, { Fragment } from 'react'
+
+export default function MainLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <Box>
+      <NavBar>
+        <Fragment></Fragment>
+      </NavBar>
+      <Box component="main">
+        <Grid container spacing={3}>
+          <Grid item xs={3}>
+            {/* <Sidebar></Sidebar> */}
+          </Grid>
+          <Grid item xs={6}>
+            <Container>
+              {children}
+            </Container>
+          </Grid>
+        </Grid>
+      </Box>
+      <Footer />
+    </Box>
+  )
+}
