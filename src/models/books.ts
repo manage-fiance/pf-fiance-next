@@ -7,3 +7,9 @@ export type Book = {
     id: number,
     rating: string
 }
+
+export type BookRequest = {
+    limit: number,
+    page: number,
+    title: string
+}

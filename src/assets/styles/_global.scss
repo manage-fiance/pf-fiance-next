@@ -10,9 +10,13 @@ body {
 }
 
 .navbar-bg {
-    background-color: #f07c65;
+    background-color: #ffffff;
 
     &__transparent {
         background-color: #f07c6500;
     }
+}
+
+.mb-8 {
+    margin-bottom: 8px;
 }

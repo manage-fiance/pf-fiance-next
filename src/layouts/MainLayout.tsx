@@ -12,11 +12,9 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         <Fragment></Fragment>
       </NavBar>
       <Box component="main">
-        <Grid container spacing={3}>          
+        <Grid container spacing={3}>
           <Grid item xs={12}>
-            <Container maxWidth='lg'>
-              {children}
-            </Container>
+            {children}
           </Grid>
         </Grid>
       </Box>

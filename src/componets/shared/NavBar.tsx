@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Toolbar, useScrollTrigger } from '@mui/material';
+import { AppBar, Box, Button, Container, Toolbar, useScrollTrigger } from '@mui/material';
 import { Link } from '@mui/material';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
@@ -22,27 +22,28 @@ function ElevationScroll(props: Props) {
     threshold: 0,
     target: window ? window() : undefined,
   });
-  
+
   return React.cloneElement(children, {
     elevation: trigger ? 4 : 0,
+    className: 'navbar-bg'
   });
 }
 
-export default function NavBar(props: Props) {  
+export default function NavBar(props: Props) {
   return (
     <ElevationScroll {...props}>      
-      <AppBar position='sticky' color='transparent'>
-        <Toolbar>
-          <Link href='/' underline='none' component='a'>
-            <Image src={logo} alt='logo' style={{ width: '70px' }} />
-          </Link>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <Button>Sign In</Button>
-            <Button> Sign up </Button>
-          </Box>
-        </Toolbar>
-      </AppBar>
+        <AppBar position='sticky' className='navbar-bg'>
+          <Toolbar>
+            <Link href='/' underline='none' component='a'>
+              <Image src={logo} alt='logo' width={80} height={80} />
+            </Link>
+            <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+              <Button>Sign In</Button>
+              <Button> Sign up </Button>
+            </Box>
+          </Toolbar>
+        </AppBar>
     </ElevationScroll>
   );
 }

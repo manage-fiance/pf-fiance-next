@@ -9,17 +9,22 @@ import { Book } from '@/models/books'
 import { useRouter } from 'next/router'
 import BookBlock from './Block'
 
+type ListBookProps = {
+    limit?: number,
+    page?: number
+}
+
 const getBooksData = async (url: string) => {
     const data = await get(url)
     return data
 }
 
-export default function ListBooks() {
+export default function ListBooks({limit, page}: ListBookProps, props: React.ReactNode) {
     const router = useRouter()
     const [books, setBooks] = useState([])
     const [loading, setLoading] = useState(true)
     useEffect(() => {
-        getBooksData("/api/books").then(res => {
+        getBooksData(`/api/books?limit=${limit}&page=${page}`).then(res => {
             if (res.success) {
                 setBooks(res.data?.data)
             }
