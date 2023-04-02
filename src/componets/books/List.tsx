@@ -32,7 +32,7 @@ export default function ListBooks() {
 
     return (
         <div className='books'>
-            <Grid spacing={2} container>
+            <Grid spacing={6} container>
                 {books.map((item: Book) =>
                     <BookBlock item={item} loading={loading} key={item.id}/>
                     )

@@ -1,7 +1,8 @@
-import { AppBar, Box, Button, Toolbar, useScrollTrigger } from '@mui/material'
-import {Link} from '@mui/material';
-import React from 'react'
-
+import { AppBar, Box, Button, Toolbar, useScrollTrigger } from '@mui/material';
+import { Link } from '@mui/material';
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
+import logo from '../../assets/images/logo.svg';
 interface Props {
   /**
    * Injected by the documentation to work in an iframe.
@@ -21,19 +22,19 @@ function ElevationScroll(props: Props) {
     threshold: 0,
     target: window ? window() : undefined,
   });
-
+  
   return React.cloneElement(children, {
     elevation: trigger ? 4 : 0,
   });
 }
 
-export default function NavBar(props: Props) {
+export default function NavBar(props: Props) {  
   return (
-    <ElevationScroll {...props}>
-      <AppBar color='default' position='sticky'>
+    <ElevationScroll {...props}>      
+      <AppBar position='sticky' color='transparent'>
         <Toolbar>
-          <Link href="/" underline="none" component="a">
-            <h1>Book sharing</h1>
+          <Link href='/' underline='none' component='a'>
+            <Image src={logo} alt='logo' style={{ width: '70px' }} />
           </Link>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
@@ -43,6 +44,5 @@ export default function NavBar(props: Props) {
         </Toolbar>
       </AppBar>
     </ElevationScroll>
-
-  )
+  );
 }

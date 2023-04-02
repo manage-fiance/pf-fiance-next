@@ -8,3 +8,11 @@ body {
     padding: 0;
     height: 100vh;
 }
+
+.navbar-bg {
+    background-color: #f07c65;
+
+    &__transparent {
+        background-color: #f07c6500;
+    }
+}

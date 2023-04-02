@@ -7,13 +7,14 @@ const http = async (method: string, url: string, payload: any, options: any) => 
     }
     const response = await fetch(url, config)
     const data = await response.json()
+    
     if (response.status === 200 || response.ok) {
         return {
             success: true,
             data: data
         }
-    }
-    return data
+    }    
+    return data.data
 
 }
 
