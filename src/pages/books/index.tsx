@@ -7,7 +7,7 @@ export default function ListBook() {
     <div>
         <ListBooks />
         <Button>
-            Load more
+            More infomation...
         </Button>
     </div>
   )
