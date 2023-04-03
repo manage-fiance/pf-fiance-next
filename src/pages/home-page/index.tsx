@@ -1,7 +1,7 @@
 import List from '@/componets/books/List'
 import RectangleImageHomepage from '@/componets/retangle';
 import { BookRequest } from '@/models/books';
-import { Button, Container } from '@mui/material';
+import { Box, Button, Container, Skeleton } from '@mui/material';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 
@@ -11,6 +11,11 @@ export default function HomePage() {
     page: 1,
     title: ''
   })
+
+  const [isLoading, setLoading] = useState(true)
+  const handleFetchingData = (value: boolean) => {
+    setLoading(value)
+  }
   const router = useRouter()
   const handleToPageBooks = () => {
     router.push("/books")
@@ -20,11 +25,19 @@ export default function HomePage() {
       <RectangleImageHomepage />
       <Container maxWidth='lg'>
         <h1>Sach moi cap nhat</h1>
-        <List {...filter} />
+        {isLoading &&
+          <Skeleton />}
+
         <Container>
-          <Button onClick={handleToPageBooks}>
-            More infor
-          </Button>
+          <List limit={filter.limit} page={filter.page} onFetchSuccess={handleFetchingData} />
+          <Box sx={{
+            display: 'flex',
+            justifyContent: 'center'
+          }}>
+            <Button onClick={handleToPageBooks} variant='contained' disabled={isLoading}>
+              More infor
+            </Button>
+          </Box>
         </Container>
       </Container>
     </div>

@@ -4,14 +4,15 @@ import useSWR from 'swr'
 import {
     get
 } from '../../services/api'
-import { Grid } from '@mui/material'
+import { Box, Grid } from '@mui/material'
 import { Book } from '@/models/books'
 import { useRouter } from 'next/router'
 import BookBlock from './Block'
 
 type ListBookProps = {
     limit?: number,
-    page?: number
+    page?: number,
+    onFetchSuccess: (arg: boolean) => void
 }
 
 const getBooksData = async (url: string) => {
@@ -19,7 +20,7 @@ const getBooksData = async (url: string) => {
     return data
 }
 
-export default function ListBooks({limit, page}: ListBookProps, props: React.ReactNode) {
+export default function ListBooks({limit, page, onFetchSuccess}: ListBookProps) {
     const router = useRouter()
     const [books, setBooks] = useState([])
     const [loading, setLoading] = useState(true)
@@ -27,6 +28,7 @@ export default function ListBooks({limit, page}: ListBookProps, props: React.Rea
         getBooksData(`/api/books?limit=${limit}&page=${page}`).then(res => {
             if (res.success) {
                 setBooks(res.data?.data)
+                onFetchSuccess(false)
             }
         }).catch()
 
@@ -36,7 +38,9 @@ export default function ListBooks({limit, page}: ListBookProps, props: React.Rea
     }, [])
 
     return (
-        <div className='books'>
+        <Box className='books' sx={{
+            mb: 16
+        }}>
             <Grid spacing={6} container>
                 {books.map((item: Book) =>
                     <BookBlock item={item} loading={loading} key={item.id}/>
@@ -44,6 +48,6 @@ export default function ListBooks({limit, page}: ListBookProps, props: React.Rea
                 }
             </Grid>
 
-        </div>
+        </Box>
     )
 }
