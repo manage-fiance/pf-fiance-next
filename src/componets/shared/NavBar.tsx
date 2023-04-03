@@ -1,8 +1,9 @@
 import { AppBar, Box, Button, Container, Toolbar, useScrollTrigger } from '@mui/material';
 import { Link } from '@mui/material';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import logo from '../../assets/images/logo.svg';
+import AuthModal from '@/layouts/AuthModal';
 interface Props {
   /**
    * Injected by the documentation to work in an iframe.
@@ -30,8 +31,16 @@ function ElevationScroll(props: Props) {
 }
 
 export default function NavBar(props: Props) {
+  const [isShowAuthModal, setStatusAuthModal] = useState<boolean>(false)
+  const handleSignIn = () => {
+    setStatusAuthModal(true)
+  }
+  const handleSignUp = () => {
+    setStatusAuthModal(true)
+  }
   return (
-    <ElevationScroll {...props}>      
+    <Fragment>
+      <ElevationScroll {...props}>
         <AppBar position='sticky' className='navbar-bg'>
           <Toolbar>
             <Link href='/' underline='none' component='a'>
@@ -39,11 +48,18 @@ export default function NavBar(props: Props) {
             </Link>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <Button>Sign In</Button>
-              <Button> Sign up </Button>
+              <Button onClick={handleSignIn}>Sign In</Button>
+              <Button onClick={handleSignUp}> Sign up </Button>
             </Box>
           </Toolbar>
         </AppBar>
-    </ElevationScroll>
+      </ElevationScroll>
+      <AuthModal open={isShowAuthModal} title='Sign In' closeModal={(val) => setStatusAuthModal(val) }>
+        <p>Sign in</p>
+      </AuthModal>
+      <AuthModal open={isShowAuthModal} title='Sign Up' closeModal={(val) => setStatusAuthModal(val) }>
+        <p>Sign in</p>
+      </AuthModal>
+    </Fragment>
   );
 }
