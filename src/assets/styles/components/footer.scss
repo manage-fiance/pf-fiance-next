@@ -1,5 +1,5 @@
 .footer {
-    background-color: rgb(71, 71, 71);
+    background-color: rgb(137 136 136);
     width: 100%;
     height: 200px;
     padding: 24px 16px;
@@ -11,5 +11,13 @@
         &:last-child {
             margin-right: 0;
         }
+    }
+
+    & a {
+        text-decoration: none;
+    }
+
+    .icon-social {
+        cursor: pointer;
     }
 }

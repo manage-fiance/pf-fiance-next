@@ -1,6 +1,6 @@
 import { Book } from '@/models/books';
 import {
-    Alert,
+  Alert,
   Button,
   Card,
   CardActions,
@@ -21,7 +21,7 @@ type BookProps = {
   loading: boolean;
 };
 
-export default function BookBlock(props: BookProps) {
+export default function BookBlock(props: BookProps, className?: string) {
   const [isShowToast, setShowToast] = useState(false);
   const router = useRouter();
   const handleDetail = (id: number) => {
@@ -34,30 +34,21 @@ export default function BookBlock(props: BookProps) {
     setShowToast(true);
   };
 
-  const { item, loading } = props;
+  const handleHover = () => {
+    console.log('hover');
+  };
 
+  const { item, loading } = props;
   return (
     <Fragment>
       {loading && <Skeleton variant='rectangular' width={210} height={118} />}
-      <Grid item xs={12} md={6} lg={4} key={item.id}>
-        <Card sx={{ height: 450 }} className='books-block'>
-          <CardMedia component='img' image={item.avatar} height={150} />
-          <CardHeader
-            title={item.name}
-            subheader={<Rating value={parseInt(item.rating)} />}
-          ></CardHeader>
-          <CardContent>
-            <p className='books-block__short-description'>{item.short_description}</p>
-          </CardContent>
-          <CardActions>
-            <Button onClick={() => handleSharing(item.id)} variant='contained'>
-              Share
-            </Button>
-            <Button onClick={() => handleDetail(item.id)} variant='contained'>
-              Detail
-            </Button>
-          </CardActions>
-        </Card>
+      <Grid item xs={12} md={6} lg={4} key={item.id} className={className}>
+        <div className='card-background'>
+          <img src={item.avatar} alt={item.name} className='card_bg' />
+          <div className='card_content'>
+            <h3 className='card__category'></h3>
+          </div>
+        </div>
       </Grid>
 
       <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} open={isShowToast}>

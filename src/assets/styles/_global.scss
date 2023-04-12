@@ -1,22 +1,75 @@
+@import './variable.scss';
+
 main {
-    
-    width: 100%;
+  width: 100%;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
 }
 
 .navbar-bg {
-    background-color: #ffffff;
+  background-color: #ffffff;
 
-    &__transparent {
-        background-color: #f07c6500;
-    }
+  &__transparent {
+    background-color: #f07c6500;
+  }
 }
 
-.mb-8 {
-    margin-bottom: 8px;
+@each $m in $margin {
+  .mb-#{$m} {
+    margin-bottom: #{$m}px;
+  }
+
+  .mt-#{$m} {
+    margin-top: #{$m}px;
+  }
+
+  .my-#{$m} {
+    margin-top: #{$m}px;
+    margin-bottom: #{$m}px;
+  }
+
+  .mx-#{$m} {
+    margin-left: #{$m}px;
+    margin-right: #{$m}px;
+  }
+
+  .mr-#{$m} {
+    margin-right: #{$m}px;
+  }
+
+  .ml-#{$m} {
+    margin-left: #{$m}px;
+  }
+}
+
+@each $p in $padding {
+  .mb-#{$p} {
+    padding-bottom: #{$p}px;
+  }
+
+  .mt-#{$p} {
+    padding-top: #{$p}px;
+  }
+
+  .my-#{$p} {
+    padding-top: #{$p}px;
+    padding-bottom: #{$p}px;
+  }
+
+  .mx-#{$p} {
+    padding-left: #{$p}px;
+    padding-right: #{$p}px;
+  }
+
+  .mr-#{$p} {
+    padding-right: #{$p}px;
+  }
+
+  .ml-#{$p} {
+    padding-left: #{$p}px;
+  }
 }

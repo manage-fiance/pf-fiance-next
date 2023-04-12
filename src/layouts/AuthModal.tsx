@@ -1,14 +1,17 @@
+import Form from '@/componets/shared/Form'
+import { FormProps } from '@/models/auth'
 import { Box, Modal, Typography } from '@mui/material'
-import React, { Fragment } from 'react'
+import React, { Fragment, useRef } from 'react'
 
 type ModalProps = {
     open: boolean,
     title: string,
-    children: React.ReactNode,
-    closeModal?: (arg: boolean) => void
+    closeModal?: (arg: boolean) => void,
+    formProps: FormProps
+    
 }
 
-export default function AuthModal(props: ModalProps) {
+export default function AuthModal({...props}: ModalProps) {
     const handleCloseModal = () => {        
         props.closeModal && props.closeModal(false)
     }
@@ -18,9 +21,15 @@ export default function AuthModal(props: ModalProps) {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
                 onClose={handleCloseModal}
+                sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    p: 1
+                }}
             >
                 <Box>
-                    {props.children}
+                    <Form {...props.formProps}/>
                 </Box>
             </Modal>
         </div>

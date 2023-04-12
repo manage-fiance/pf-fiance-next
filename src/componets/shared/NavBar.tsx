@@ -1,9 +1,16 @@
-import { AppBar, Box, Button, Container, Toolbar, useScrollTrigger } from '@mui/material';
+import {
+  AppBar,
+  Box,
+  Button,
+  Toolbar,
+  useScrollTrigger,
+} from '@mui/material';
 import { Link } from '@mui/material';
 import Image from 'next/image';
 import React, { Fragment, useEffect, useState } from 'react';
 import logo from '../../assets/images/logo.svg';
 import AuthModal from '@/layouts/AuthModal';
+import { FormProps } from '@/models/auth';
 interface Props {
   /**
    * Injected by the documentation to work in an iframe.
@@ -26,22 +33,96 @@ function ElevationScroll(props: Props) {
 
   return React.cloneElement(children, {
     elevation: trigger ? 4 : 0,
-    className: 'navbar-bg'
+    className: 'navbar-bg',
   });
 }
 
 export default function NavBar(props: Props) {
-  const [isShowAuthModal, setStatusAuthModal] = useState<boolean>(false)
+  const [isShowAuthModal, setStatusAuthModal] = useState<boolean>(false);
+  const signInProps: FormProps = {
+    action: '/auth/sign-in',
+    onValidate: (args) => handleValidate(args),
+    fields: [
+      {
+        key: 'email',
+        label: 'Email',
+        rule: [
+          {
+            required: true,
+          },
+        ],
+      },
+      {
+        key: 'password',
+        label: 'Password',
+        rule: [
+          {
+            required: true,
+          },
+        ],
+      },
+    ],
+    submitLabel: 'Sign in',
+  };
+
+  const signUpProps: FormProps = {
+    action: '/auth/sign-up',
+    onValidate: (args) => handleValidate(args),
+    fields: [
+      {
+        key: 'email',
+        label: 'Email',
+        rule: [
+          {
+            required: true,
+          },
+        ],
+      },
+      {
+        key: 'first_name',
+        label: 'First name',
+        rule: [
+          {
+            required: true,
+          },
+        ],
+      },
+      {
+        key: 'last_name',
+        label: 'Last name',
+        rule: [
+          {
+            required: true,
+          },
+        ],
+      },
+      {
+        key: 'password',
+        label: 'Password',
+        rule: [
+          {
+            required: true,
+          },
+        ],
+      },
+    ],
+    submitLabel: 'Sign up',
+  };
+
+  const handleValidate = (args: any) => {
+    console.log(args);
+  };
+
   const handleSignIn = () => {
-    setStatusAuthModal(true)
-  }
+    setStatusAuthModal(true);
+  };
   const handleSignUp = () => {
-    setStatusAuthModal(true)
-  }
+    setStatusAuthModal(true);
+  };
   return (
     <Fragment>
       <ElevationScroll {...props}>
-        <AppBar position='sticky' className='navbar-bg'>
+        <AppBar position='sticky'>
           <Toolbar>
             <Link href='/' underline='none' component='a'>
               <Image src={logo} alt='logo' width={80} height={80} />
@@ -54,12 +135,19 @@ export default function NavBar(props: Props) {
           </Toolbar>
         </AppBar>
       </ElevationScroll>
-      <AuthModal open={isShowAuthModal} title='Sign In' closeModal={(val) => setStatusAuthModal(val) }>
-        <p>Sign in</p>
-      </AuthModal>
-      <AuthModal open={isShowAuthModal} title='Sign Up' closeModal={(val) => setStatusAuthModal(val) }>
-        <p>Sign in</p>
-      </AuthModal>
+      <AuthModal
+        open={isShowAuthModal}
+        title='Sign In'
+        closeModal={(val) => setStatusAuthModal(val)}
+        formProps={signInProps}
+      />
+
+      <AuthModal
+        open={isShowAuthModal}
+        title='Sign Up'
+        closeModal={(val) => setStatusAuthModal(val)}
+        formProps={signUpProps}
+      />
     </Fragment>
   );
 }

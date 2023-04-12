@@ -24,7 +24,7 @@ export default function HomePage() {
     <div>
       <RectangleImageHomepage />
       <Container maxWidth='lg'>
-        <h1>Sach moi cap nhat</h1>
+        <h1 className='mb-16'>Sach moi cap nhat</h1>
         {isLoading &&
           <Skeleton />}
 
